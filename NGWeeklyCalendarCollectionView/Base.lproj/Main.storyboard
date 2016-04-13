@@ -27,7 +27,7 @@
                                 </constraints>
                                 <collectionViewLayout key="collectionViewLayout" id="agS-18-zfL" customClass="NGWeeklyCalendarCollectionViewFlowLayout"/>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NGWeeklyCalendarCollectionViewReId" id="3Hy-VK-zUm" customClass="NGWeeklyCalendarCollectionViewCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NGWeeklyCalendarCollectionViewCellReId" id="3Hy-VK-zUm" customClass="NGWeeklyCalendarCollectionViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">

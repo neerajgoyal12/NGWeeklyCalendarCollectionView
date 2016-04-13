@@ -11,14 +11,14 @@
 #import "NSDate+NGWeeklyCalendar.h"
 #import "NGWeeklyCalendarCollectionViewCell.h"
 
-@interface ViewController ()
+@interface NGWeeklyCalendarCollectionViewController ()
 @property (nonatomic, strong) NSDate *lastSelectedDate;
 @property (nonatomic) BOOL onceBool;
 @property (nonatomic) NSInteger yearMinus;
 @property (nonatomic) NSInteger yearPlus;
 @end
 
-@implementation ViewController
+@implementation NGWeeklyCalendarCollectionViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,32 +52,32 @@
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (![collectionView isKindOfClass:[NGWeeklyCollectionView class]]) return 0;
+    if (![collectionView isKindOfClass:[NGWeeklyCalendarCollectionView class]]) return 0;
     return [self.collectionView.calendarStartDate daysBetweenDate:self.collectionView.calendarEndDate];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (![collectionView isKindOfClass:[NGWeeklyCollectionView class]]) return nil;
+    if (![collectionView isKindOfClass:[NGWeeklyCalendarCollectionView class]]) return nil;
     
-    NGWeeklyCollectionView *weeklyCollectionView = (NGWeeklyCalendarCollectionView *)collectionView;
-    NGWeeklyCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kNGWeeklyCollectionViewReId forIndexPath:indexPath];
+    NGWeeklyCalendarCollectionView *weeklyCollectionView = (NGWeeklyCalendarCollectionView *)collectionView;
+    NGWeeklyCalendarCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kNGWeeklyCalendarCollectionViewCellReId forIndexPath:indexPath];
     [cell configureForDate:[weeklyCollectionView dateForIndexPath:indexPath]];
     return cell;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    if (![collectionView isKindOfClass:[NGWeeklyCollectionView class]]) return 0;
+    if (![collectionView isKindOfClass:[NGWeeklyCalendarCollectionView class]]) return 0;
     return 1;
 }
 
 #pragma mark -  UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (![collectionView isKindOfClass:[NGWeeklyCollectionView class]]) return ;
+    if (![collectionView isKindOfClass:[NGWeeklyCalendarCollectionView class]]) return ;
     
-    NGWeeklyCollectionView *weeklyCollectionView = (NGWeeklyCalendarCollectionView *)collectionView;
+    NGWeeklyCalendarCollectionView *weeklyCollectionView = (NGWeeklyCalendarCollectionView *)collectionView;
     self.lastSelectedDate = [weeklyCollectionView.calendarStartDate dateByAddingDays:indexPath.item];
     [self setHeaderFooterLabelsForDate:_lastSelectedDate];
     if(_delegate && [_delegate respondsToSelector:@selector(collectionView:didSelectDate:)])
@@ -87,7 +87,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (_delegate && [_delegate respondsToSelector:@selector(collectionView:didEndDisplayingCell:forDate:)]) {
-        [_delegate collectionView:self.collectionView didEndDisplayingCell:(NGWeeklyCollectionViewCell *)cell forDate:[self.collectionView dateForIndexPath:indexPath]];
+        [_delegate collectionView:self.collectionView didEndDisplayingCell:(NGWeeklyCalendarCollectionViewCell *)cell forDate:[self.collectionView dateForIndexPath:indexPath]];
     }
 }
 

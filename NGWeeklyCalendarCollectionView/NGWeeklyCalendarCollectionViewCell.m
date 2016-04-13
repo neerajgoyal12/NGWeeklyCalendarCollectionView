@@ -9,7 +9,7 @@
 #import "NGWeeklyCalendarCollectionViewCell.h"
 #import "NSDate+NGWeeklyCalendar.h"
 
-NSString *const kNGWeeklyCalendarCollectionViewReId = @"NGWeeklyCalendarCollectionViewReId";
+NSString *const kNGWeeklyCalendarCollectionViewCellReId = @"NGWeeklyCalendarCollectionViewCellReId";
 
 @interface NGWeeklyCalendarCollectionViewCell ()
 @property (nonatomic, strong, readwrite) NSDate *date;

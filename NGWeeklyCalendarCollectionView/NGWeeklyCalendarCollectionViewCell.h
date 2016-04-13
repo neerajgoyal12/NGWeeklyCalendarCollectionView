@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString *const kNGWeeklyCalendarCollectionViewReId;
+extern NSString *const kNGWeeklyCalendarCollectionViewCellReId;
 
 @interface NGWeeklyCalendarCollectionViewCell : UICollectionViewCell
 @property (nonatomic, weak) IBOutlet UILabel *lblWeekday;

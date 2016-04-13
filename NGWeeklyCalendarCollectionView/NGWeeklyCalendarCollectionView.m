@@ -15,7 +15,7 @@
 NSString *const kNGMinusYearsToShow = @"-3";
 NSString *const kNGPlusYearsToShow = @"3";
 
-@implementation NGWeeklyCollectionView
+@implementation NGWeeklyCalendarCollectionView
 
 /*
 // Only override drawRect: if you perform custom drawing.
