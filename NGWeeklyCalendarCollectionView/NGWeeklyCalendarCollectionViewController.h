@@ -31,7 +31,7 @@
 @property (nonatomic, weak) id<NGWeeklyCalendarControllerDelegate> delegate;
 @property (nonatomic, weak) id<NGWeeklyCalendarControllerDataSource> dataSource;
 
-@property (nonatomic, weak) IBOutlet NGWeeklyCollectionView *collectionView;
+@property (nonatomic, weak) IBOutlet NGWeeklyCalendarCollectionView *collectionView;
 
 @property (nonatomic, weak) IBOutlet UIView *vwHeader;
 @property (nonatomic, weak) IBOutlet UIView *vwFooter;

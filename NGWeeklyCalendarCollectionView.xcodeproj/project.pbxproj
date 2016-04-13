@@ -95,21 +95,12 @@
 			children = (
 				070B7B471CBDA9860004AC81 /* AppDelegate.h */,
 				070B7B481CBDA9860004AC81 /* AppDelegate.m */,
-				070B7B4A1CBDA9860004AC81 /* NGWeeklyCalendarCollectionViewController.h */,
-				070B7B4B1CBDA9860004AC81 /* NGWeeklyCalendarCollectionViewController.m */,
+				07296BF41CBEF072009F788B /* NGWeeklyCollectionView */,
 				070B7B4D1CBDA9860004AC81 /* Main.storyboard */,
 				070B7B501CBDA9880004AC81 /* Assets.xcassets */,
 				070B7B521CBDA9880004AC81 /* LaunchScreen.storyboard */,
 				070B7B551CBDA9890004AC81 /* Info.plist */,
 				070B7B441CBDA9860004AC81 /* Supporting Files */,
-				070B7B691CBDA9FE0004AC81 /* NGWeeklyCalendarCollectionViewFlowLayout.h */,
-				070B7B6A1CBDA9FE0004AC81 /* NGWeeklyCalendarCollectionViewFlowLayout.m */,
-				070B7B6C1CBDB0820004AC81 /* NGWeeklyCalendarCollectionViewCell.h */,
-				070B7B6D1CBDB0820004AC81 /* NGWeeklyCalendarCollectionViewCell.m */,
-				070B7B6F1CBDB3060004AC81 /* NSDate+NGWeeklyCalendar.h */,
-				070B7B701CBDB3060004AC81 /* NSDate+NGWeeklyCalendar.m */,
-				070B7B751CBDB9310004AC81 /* NGWeeklyCalendarCollectionView.h */,
-				070B7B761CBDB9310004AC81 /* NGWeeklyCalendarCollectionView.m */,
 			);
 			path = NGWeeklyCalendarCollectionView;
 			sourceTree = "<group>";
@@ -129,6 +120,23 @@
 				070B7B601CBDA98B0004AC81 /* Info.plist */,
 			);
 			path = NGWeeklyCalendarCollectionViewTests;
+			sourceTree = "<group>";
+		};
+		07296BF41CBEF072009F788B /* NGWeeklyCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				070B7B4A1CBDA9860004AC81 /* NGWeeklyCalendarCollectionViewController.h */,
+				070B7B4B1CBDA9860004AC81 /* NGWeeklyCalendarCollectionViewController.m */,
+				070B7B691CBDA9FE0004AC81 /* NGWeeklyCalendarCollectionViewFlowLayout.h */,
+				070B7B6A1CBDA9FE0004AC81 /* NGWeeklyCalendarCollectionViewFlowLayout.m */,
+				070B7B6C1CBDB0820004AC81 /* NGWeeklyCalendarCollectionViewCell.h */,
+				070B7B6D1CBDB0820004AC81 /* NGWeeklyCalendarCollectionViewCell.m */,
+				070B7B6F1CBDB3060004AC81 /* NSDate+NGWeeklyCalendar.h */,
+				070B7B701CBDB3060004AC81 /* NSDate+NGWeeklyCalendar.m */,
+				070B7B751CBDB9310004AC81 /* NGWeeklyCalendarCollectionView.h */,
+				070B7B761CBDB9310004AC81 /* NGWeeklyCalendarCollectionView.m */,
+			);
+			name = NGWeeklyCollectionView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
