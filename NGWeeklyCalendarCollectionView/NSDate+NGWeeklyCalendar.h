@@ -18,4 +18,6 @@
 -(NSDate *)dateByAddingMonths:(NSInteger)months;
 -(NSDate *)dateByAddingYears:(NSInteger)years;
 -(NSInteger)daysBetweenDate:(NSDate*)date;
+-(NSDate *)weekStartDate: (NSInteger)weekStartIndex;
+-(NSNumber *)weekDay;
 @end

@@ -116,4 +116,22 @@
     return newDate;
 }
 
+-(NSDate *)weekStartDate: (NSInteger)weekStartIndex
+{
+    int weekDay = [[self weekDay] intValue];
+    
+    NSInteger gap = (weekStartIndex <=  weekDay) ?  weekDay  : ( 7 + weekDay );
+    NSInteger day = weekStartIndex - gap;
+    
+    return [self dateByAddingDays:day];
+}
+
+-(NSNumber *)weekDay
+{
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:self];
+    return [NSNumber numberWithInteger:([comps weekday] - 1)];
+}
+
+
 @end

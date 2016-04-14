@@ -19,7 +19,7 @@
 @end
 
 @implementation NGWeeklyCalendarCollectionViewController
-
+static const NSUInteger kWeekDayStart = 7; //{1 -7 1 being Monday}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -142,8 +142,8 @@
 -(void)scrollToDate:(NSDate *)date
 {
     if ([self isDateValid:date]) {
-        
-        [self.collectionView scrollToDate:date atScrollPosition:[self getScrollPositionForDate:date] animated:YES];
+        NSDate* scrollDate = [date weekStartDate:kWeekDayStart];
+        [self.collectionView scrollToDate:scrollDate atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
         [self.collectionView selectDate:date animated:YES scrollPosition:UICollectionViewScrollPositionNone
          ];
         self.lastSelectedDate = date;
