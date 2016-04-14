@@ -15,7 +15,7 @@
 @protocol NGWeeklyCalendarControllerDataSource <NSObject>
 
 @optional
--(void)collectionView:(NGWeeklyCalendarCollectionView *)collectionView addEventForDate:(NSDate *)date;
+-(BOOL)collectionView:(NGWeeklyCalendarCollectionView *)collectionView cellHasEvent:(NGWeeklyCalendarCollectionViewCell *)cell forDate:(NSDate *)date;
 @end
 
 @protocol NGWeeklyCalendarControllerDelegate <NSObject>
@@ -45,10 +45,13 @@
 @property (nonatomic, weak) IBOutlet UIButton *btnYearPlus;
 @property (nonatomic, weak) IBOutlet UIButton *btnMonthPlus;
 
+@property (nonatomic, weak) IBOutlet UIButton *btnTodaysDate;
+
 -(IBAction)btnYearMinusTapped:(UIButton *)btnYearMinus;
 -(IBAction)btnMonthMinusTapped:(UIButton *)btnMonthMinus;
 -(IBAction)btnYearPlusTapped:(UIButton *)btnYearPlus;
 -(IBAction)btnMonthPlusTapped:(UIButton *)btnMonthPlus;
+-(IBAction)btnTodaysDateTapped:(UIButton *)btnTodaysDate;
 
 @end
 

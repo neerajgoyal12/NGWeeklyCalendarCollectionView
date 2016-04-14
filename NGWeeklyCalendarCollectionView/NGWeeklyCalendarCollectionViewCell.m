@@ -32,7 +32,11 @@ NSString *const kNGWeeklyCalendarCollectionViewCellReId = @"NGWeeklyCalendarColl
     self.date = date;
     _lblWeekday.text = [[_date getShortStringForWeekday] uppercaseString];
     _lblDateUnit.text = [NSString stringWithFormat:@"%i", (int)[_date getDateUnit]];
-    _imgVwEvent.image = [UIImage imageNamed:@"big_green_dot"];
+    _imgVwEvent.image = nil;
 }
 
+-(void)cellHasEvent:(BOOL)hasEvent
+{
+    if (hasEvent) _imgVwEvent.image = [UIImage imageNamed:@"big_green_dot"];
+}
 @end

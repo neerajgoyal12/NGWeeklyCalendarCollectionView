@@ -62,7 +62,11 @@ static const NSUInteger kWeekDayStart = 7; //{1 -7 1 being Monday}
     
     NGWeeklyCalendarCollectionView *weeklyCollectionView = (NGWeeklyCalendarCollectionView *)collectionView;
     NGWeeklyCalendarCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kNGWeeklyCalendarCollectionViewCellReId forIndexPath:indexPath];
-    [cell configureForDate:[weeklyCollectionView dateForIndexPath:indexPath]];
+    NSDate *date = [weeklyCollectionView dateForIndexPath:indexPath];
+    [cell configureForDate:date];
+    if (_dataSource && [_dataSource respondsToSelector:@selector(collectionView:cellHasEvent:forDate:)]) {
+         [cell cellHasEvent:[_dataSource collectionView:weeklyCollectionView cellHasEvent:cell forDate:date]];
+    }
     return cell;
 }
 
@@ -120,6 +124,11 @@ static const NSUInteger kWeekDayStart = 7; //{1 -7 1 being Monday}
     [self scrollToDate:date];
 }
 
+-(IBAction)btnTodaysDateTapped:(UIButton *)btnTodaysDate
+{
+    NSDate *date = [NSDate date];
+    [self scrollToDate:date];
+}
 
 #pragma mark - Date Scrolling And Selection
 -(BOOL)isDateValid:(NSDate *)date
@@ -152,16 +161,16 @@ static const NSUInteger kWeekDayStart = 7; //{1 -7 1 being Monday}
 }
 
 #pragma mark - RequestEventsForVisibleCells
--(void)requestEventsForVisibleCells
-{
-    NSArray *visibleIndexPaths = [self.collectionView indexPathsForVisibleItems];
-    for (NSIndexPath *indexPath in visibleIndexPaths) {
-        NSDate *date = [self.collectionView dateForIndexPath:indexPath];
-        if (_dataSource && [_dataSource respondsToSelector:@selector(collectionView:addEventForDate:)]) {
-            [_dataSource collectionView:self.collectionView addEventForDate:date];
-        }
-    }
-}
+//-(void)requestEventsForVisibleCells
+//{
+//    NSArray *visibleIndexPaths = [self.collectionView indexPathsForVisibleItems];
+//    for (NSIndexPath *indexPath in visibleIndexPaths) {
+//        NSDate *date = [self.collectionView dateForIndexPath:indexPath];
+//        if (_dataSource && [_dataSource respondsToSelector:@selector(collectionView:addEventForDate:)]) {
+//            [_dataSource collectionView:self.collectionView addEventForDate:date];
+//        }
+//    }
+//}
 
 #pragma mark - Set Header and Footer Label
 -(void)setHeaderFooterLabelsForDate:(NSDate *)date

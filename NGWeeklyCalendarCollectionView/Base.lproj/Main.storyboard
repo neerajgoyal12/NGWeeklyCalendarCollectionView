@@ -157,10 +157,20 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSe-Vv-WXP">
+                                        <rect key="frame" x="16" y="8" width="30" height="28"/>
+                                        <state key="normal" title="T"/>
+                                        <connections>
+                                            <action selector="btnTodaysDateTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h6Y-fM-CLG"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="ZSe-Vv-WXP" firstAttribute="centerY" secondItem="1r1-mO-092" secondAttribute="centerY" id="3dq-8J-rJn"/>
                                     <constraint firstItem="yX9-kg-Uy4" firstAttribute="centerY" secondItem="1r1-mO-092" secondAttribute="centerY" id="Hjy-6w-VDv"/>
+                                    <constraint firstItem="ZSe-Vv-WXP" firstAttribute="leading" secondItem="1r1-mO-092" secondAttribute="leadingMargin" constant="8" id="JBJ-O2-efA"/>
+                                    <constraint firstItem="ZSe-Vv-WXP" firstAttribute="top" secondItem="1r1-mO-092" secondAttribute="topMargin" id="d0N-64-0Do"/>
                                     <constraint firstItem="yX9-kg-Uy4" firstAttribute="centerX" secondItem="1r1-mO-092" secondAttribute="centerX" id="ePA-I8-CcA"/>
                                     <constraint firstAttribute="height" constant="44" id="nNt-bw-RVP"/>
                                 </constraints>
@@ -182,6 +192,7 @@
                     <connections>
                         <outlet property="btnMonthMinus" destination="zba-be-cSX" id="V0i-xa-XZ8"/>
                         <outlet property="btnMonthPlus" destination="CaY-ty-gAn" id="MPa-ng-7uk"/>
+                        <outlet property="btnTodaysDate" destination="ZSe-Vv-WXP" id="YeQ-aR-BqQ"/>
                         <outlet property="btnYearMinus" destination="dBR-Vl-RAT" id="BYq-QP-REH"/>
                         <outlet property="btnYearPlus" destination="EQ1-vz-HXf" id="edT-Rw-9hF"/>
                         <outlet property="collectionView" destination="HZE-0A-y3p" id="smn-XX-JWr"/>

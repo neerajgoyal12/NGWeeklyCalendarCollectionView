@@ -17,4 +17,5 @@ extern NSString *const kNGWeeklyCalendarCollectionViewCellReId;
 @property (nonatomic, weak) IBOutlet UIImageView *imgVwEvent;
 @property (nonatomic, strong, readonly) NSDate *date;
 -(void)configureForDate:(NSDate *)date;
+-(void)cellHasEvent:(BOOL)hasEvent;
 @end
