@@ -14,8 +14,9 @@
 
 extern NSString *const kNGMinusYearsToShow;
 extern NSString *const kNGPlusYearsToShow;
+extern NSString *const kWeekDayStart;
 
-@interface NGWeeklyCalendarCollectionView : UICollectionView
+@interface NGWeeklyCalendarCollectionView : UICollectionView <UIScrollViewDelegate>
 @property (nonatomic, strong) NSDate *calendarStartDate;
 @property (nonatomic, strong) NSDate *calendarEndDate;
 

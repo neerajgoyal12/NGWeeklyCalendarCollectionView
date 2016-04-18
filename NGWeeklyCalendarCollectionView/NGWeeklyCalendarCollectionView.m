@@ -12,8 +12,9 @@
 #import "NGWeeklyCalendarCollectionViewCell.h"
 
 
-NSString *const kNGMinusYearsToShow = @"-3";
-NSString *const kNGPlusYearsToShow = @"3";
+NSString *const kNGMinusYearsToShow = @"-1";
+NSString *const kNGPlusYearsToShow = @"1";
+NSString *const kWeekDayStart = @"7";
 
 @implementation NGWeeklyCalendarCollectionView
 
@@ -29,6 +30,7 @@ NSString *const kNGPlusYearsToShow = @"3";
     self = [super initWithFrame:frame collectionViewLayout:layout];
     if (self) {
         [self defaults];
+//        self.scroll
     }
     return self;
 }
@@ -43,8 +45,13 @@ NSString *const kNGPlusYearsToShow = @"3";
 
 -(void)defaults
 {
-    self.calendarStartDate = [[NSDate date] dateByAddingYears:[kNGMinusYearsToShow integerValue]];
-    self.calendarEndDate = [[NSDate date] dateByAddingYears:[kNGPlusYearsToShow integerValue]];
+    NSLog(@"Collection View Date %@", [NSDate date]);
+    NSDate *startDate = [[[NSDate date] dateByAddingYears:[kNGMinusYearsToShow integerValue]] weekStartDate:[kWeekDayStart integerValue]];
+    NSDate *endDate = [[[NSDate date] dateByAddingYears:[kNGPlusYearsToShow integerValue]] weekStartDate:[kWeekDayStart integerValue]];
+    self.calendarStartDate = startDate;
+    self.calendarEndDate = endDate;
+    NSLog(@"self.calendarStartDate = %@", startDate);
+    NSLog(@"self.calendarEndDate = %@", endDate);
     NGWeeklyCalendarCollectionViewFlowLayout *layout = [[NGWeeklyCalendarCollectionViewFlowLayout alloc] init];
     layout.minimumInteritemSpacing = 0.0;
     layout.minimumLineSpacing = 0.0;

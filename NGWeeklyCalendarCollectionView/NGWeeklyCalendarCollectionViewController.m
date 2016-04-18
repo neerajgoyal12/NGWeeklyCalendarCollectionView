@@ -19,11 +19,11 @@
 @end
 
 @implementation NGWeeklyCalendarCollectionViewController
-static const NSUInteger kWeekDayStart = 7; //{1 -7 1 being Monday}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    _onceBool = true;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,22 +31,19 @@ static const NSUInteger kWeekDayStart = 7; //{1 -7 1 being Monday}
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    _onceBool = true;
+}
 - (void)viewDidLayoutSubviews
 {
-    static BOOL once = true;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        if (once) {
-            [self.collectionView layoutIfNeeded];
-            [self scrollToDate:[NSDate date]];
-        }
-        once = false;
-    });
-//    if (_onceBool) {
-//        [self.collectionView layoutIfNeeded];
-//        [self scrollToDate:[NSDate date]];
-//        _onceBool = false;
-//    }
+    [super viewDidLayoutSubviews];
+    if (_onceBool) {
+        [self.collectionView layoutIfNeeded];
+        [self scrollToDate:[NSDate date]];
+        _onceBool = false;
+    }
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -151,31 +148,39 @@ static const NSUInteger kWeekDayStart = 7; //{1 -7 1 being Monday}
 -(void)scrollToDate:(NSDate *)date
 {
     if ([self isDateValid:date]) {
-        NSDate* scrollDate = [date weekStartDate:kWeekDayStart];
+        NSDate* scrollDate = [date weekStartDate:[kWeekDayStart integerValue]];
         [self.collectionView scrollToDate:scrollDate atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
-        [self.collectionView selectDate:date animated:YES scrollPosition:UICollectionViewScrollPositionNone
+        [self.collectionView selectDate:date animated:NO scrollPosition:UICollectionViewScrollPositionNone
          ];
         self.lastSelectedDate = date;
         [self setHeaderFooterLabelsForDate:_lastSelectedDate];
     }
 }
 
-#pragma mark - RequestEventsForVisibleCells
-//-(void)requestEventsForVisibleCells
-//{
-//    NSArray *visibleIndexPaths = [self.collectionView indexPathsForVisibleItems];
-//    for (NSIndexPath *indexPath in visibleIndexPaths) {
-//        NSDate *date = [self.collectionView dateForIndexPath:indexPath];
-//        if (_dataSource && [_dataSource respondsToSelector:@selector(collectionView:addEventForDate:)]) {
-//            [_dataSource collectionView:self.collectionView addEventForDate:date];
-//        }
-//    }
-//}
-
 #pragma mark - Set Header and Footer Label
 -(void)setHeaderFooterLabelsForDate:(NSDate *)date
 {
     _lblFooter.text = [NSString stringWithFormat:@"%i %@ %i", (int)[_lastSelectedDate getDateUnit],[[_lastSelectedDate getFullStringForMonth] capitalizedString], (int)[_lastSelectedDate getYearUnit]];
     _lblHeader.text = [NSString stringWithFormat:@"%@ %i", [[_lastSelectedDate getFullStringForMonth] capitalizedString], (int)[_lastSelectedDate getYearUnit]];
+}
+
+#pragma mark - UICollectionView Scroll Events
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+//    NSLog(@"Did Scroll");
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset NS_AVAILABLE_IOS(5_0)
+{
+    if(velocity.x < 0)
+    { //back by one week in date
+        self.lastSelectedDate =  [self.lastSelectedDate dateByAddingDays:-7];
+    } else { // forward by a week
+        self.lastSelectedDate =  [self.lastSelectedDate dateByAddingDays:7];
+    }
+    [self.collectionView selectDate:_lastSelectedDate animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+    [self setHeaderFooterLabelsForDate:_lastSelectedDate];
+    if(_delegate && [_delegate respondsToSelector:@selector(collectionView:didSelectDate:)])
+        [_delegate collectionView:self.collectionView didSelectDate:_lastSelectedDate];
 }
 @end

@@ -18,6 +18,13 @@
 -(NSDate *)dateByAddingMonths:(NSInteger)months;
 -(NSDate *)dateByAddingYears:(NSInteger)years;
 -(NSInteger)daysBetweenDate:(NSDate*)date;
--(NSDate *)weekStartDate: (NSInteger)weekStartIndex;
+-(NSDate *)weekStartDate:(NSInteger)weekStartIndex;
 -(NSNumber *)weekDay;
+-(NSDate *)dateByMakingHour:(NSUInteger)hour minute:(NSUInteger)minute seconds:(NSUInteger)seconds;
+-(NSDate *)dateAt12AMForLocalTimeZone;
+
+-(NSDate *)dateInLocalTimeZone;
++(NSDate *)getTodaysDateInLocalTimeZone;
++(NSDate *)getTommrowsDateInLocalTimeZone;
+
 @end

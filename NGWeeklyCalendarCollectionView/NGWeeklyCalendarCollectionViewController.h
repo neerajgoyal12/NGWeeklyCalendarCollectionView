@@ -53,5 +53,7 @@
 -(IBAction)btnMonthPlusTapped:(UIButton *)btnMonthPlus;
 -(IBAction)btnTodaysDateTapped:(UIButton *)btnTodaysDate;
 
+-(void)scrollToDate:(NSDate *)date;
+
 @end
 

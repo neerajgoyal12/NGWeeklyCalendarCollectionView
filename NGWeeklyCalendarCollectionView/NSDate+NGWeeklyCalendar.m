@@ -133,5 +133,39 @@
     return [NSNumber numberWithInteger:([comps weekday] - 1)];
 }
 
+-(NSDate *)dateInLocalTimeZone
+{
+    NSTimeInterval timeZoneSeconds = [[NSTimeZone localTimeZone] secondsFromGMT];
+    NSDate *dateInLocalTimezone = [self dateByAddingTimeInterval:timeZoneSeconds];
+    return dateInLocalTimezone;
+}
+
++(NSDate *)getTommrowsDateInLocalTimeZone
+{
+    NSDate *date = [NSDate date];
+    date = [date dateByAddingDays:1];
+    NSTimeInterval timeZoneSeconds = [[NSTimeZone localTimeZone] secondsFromGMT];
+    NSDate *dateInLocalTimezone = [date dateByAddingTimeInterval:timeZoneSeconds];
+    return dateInLocalTimezone;
+}
+
++(NSDate *)getTodaysDateInLocalTimeZone
+{
+    NSDate *date = [NSDate date];
+    NSTimeInterval timeZoneSeconds = [[NSTimeZone localTimeZone] secondsFromGMT];
+    NSDate *dateInLocalTimezone = [date dateByAddingTimeInterval:timeZoneSeconds];
+    return dateInLocalTimezone;
+}
+
+-(NSDate *)dateAt12AMForLocalTimeZone
+{
+    NSTimeInterval timeZoneSeconds = [[NSTimeZone localTimeZone] secondsFromGMT];
+    double seconds = fmod(timeZoneSeconds, 60);
+    double minutes = fmod(timeZoneSeconds - seconds, 60*60);
+    double hour = (timeZoneSeconds - minutes - seconds)/(60.0*60.0);
+    
+    NSDate *newDate = [self dateByMakingHour:hour minute:minutes/60.0 seconds:seconds];
+    return newDate;
+}
 
 @end

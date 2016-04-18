@@ -33,11 +33,12 @@ static const double kminimumLineSpacing = 1.0;
 -(void)prepareLayout
 {
     //don't forget to call super here
-    [super prepareLayout];
     _width = self.collectionView.bounds.size.width;
     _height = self.collectionView.bounds.size.height;
     CGFloat width = ((_width - ((_nbColumns-1) * self.minimumInteritemSpacing))/_nbColumns);
+    [self.collectionView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
     self.itemSize = CGSizeMake(width, _height);
+    [super prepareLayout];
 }
 
 - (CGSize)collectionViewContentSize
