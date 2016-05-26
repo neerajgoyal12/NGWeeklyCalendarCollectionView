@@ -77,12 +77,14 @@
     return newDate;
 }
 
--(NSInteger)daysBetweenDate:(NSDate*)date
+-(NSDate *)dateByAddingOneDay
 {
-    if (!date) {
-        return 7;
-    }
-    
+    NSTimeInterval time = [self timeIntervalSince1970];
+    time += 24*60*60;
+    return [NSDate dateWithTimeIntervalSince1970:time];
+}
+-(NSInteger)daysBetweenDate:(NSDate*)date
+{    
     NSDate *fromDate;
     NSDate *toDate;
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -98,7 +100,7 @@
     NSDateComponents *difference = [calendar components:NSCalendarUnitDay
                                                fromDate:fromDate
                                                  toDate:toDate
-                                                options:0];
+                                                options:NSCalendarWrapComponents];
     
     return [difference day];
 }
@@ -128,8 +130,8 @@
 
 -(NSNumber *)weekDay
 {
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:self];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *comps = [gregorian components:NSCalendarUnitWeekday fromDate:self];
     return [NSNumber numberWithInteger:([comps weekday] - 1)];
 }
 

@@ -12,7 +12,7 @@
 #import "NGWeeklyCalendarCollectionViewCell.h"
 
 @interface NGWeeklyCalendarCollectionViewController ()
-@property (nonatomic, strong) NSDate *lastSelectedDate;
+//@property (nonatomic, strong) NSDate *lastSelectedDate;
 @property (nonatomic) BOOL onceBool;
 @property (nonatomic) NSInteger yearMinus;
 @property (nonatomic) NSInteger yearPlus;
@@ -41,7 +41,10 @@
     [super viewDidLayoutSubviews];
     if (_onceBool) {
         [self.collectionView layoutIfNeeded];
-        [self scrollToDate:[NSDate date]];
+        if(_lastSelectedDate)
+            [self scrollToDate:_lastSelectedDate];
+        else
+            [self scrollToDate:[NSDate date]];
         _onceBool = false;
     }
 }
@@ -50,7 +53,8 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (![collectionView isKindOfClass:[NGWeeklyCalendarCollectionView class]]) return 0;
-    return [self.collectionView.calendarStartDate daysBetweenDate:self.collectionView.calendarEndDate];
+    NSInteger days = [self.collectionView.calendarStartDate daysBetweenDate:self.collectionView.calendarEndDate];
+    return days;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -79,7 +83,8 @@
     if (![collectionView isKindOfClass:[NGWeeklyCalendarCollectionView class]]) return ;
     
     NGWeeklyCalendarCollectionView *weeklyCollectionView = (NGWeeklyCalendarCollectionView *)collectionView;
-    self.lastSelectedDate = [weeklyCollectionView.calendarStartDate dateByAddingDays:indexPath.item];
+//    NSLog(@"Date %@", [self.collectionView.calendarStartDate dateByAddingDays:1]);
+    self.lastSelectedDate = [weeklyCollectionView dateForIndexPath:indexPath];
     [self setHeaderFooterLabelsForDate:_lastSelectedDate];
     if(_delegate && [_delegate respondsToSelector:@selector(collectionView:didSelectDate:)])
         [_delegate collectionView:weeklyCollectionView didSelectDate:_lastSelectedDate];
@@ -154,6 +159,8 @@
          ];
         self.lastSelectedDate = date;
         [self setHeaderFooterLabelsForDate:_lastSelectedDate];
+        if(_delegate && [_delegate respondsToSelector:@selector(collectionView:didSelectDate:)])
+            [_delegate collectionView:self.collectionView didSelectDate:_lastSelectedDate];
     }
 }
 
@@ -164,12 +171,27 @@
     _lblHeader.text = [NSString stringWithFormat:@"%@ %i", [[_lastSelectedDate getFullStringForMonth] capitalizedString], (int)[_lastSelectedDate getYearUnit]];
 }
 
+#pragma mark - Animate Footer Label
+-(void)animateHeaderFooterLable:(CGFloat)leftOrRight
+{
+    int multiplier = 0;
+    
+    if(leftOrRight < 0)
+        multiplier = -1;
+    else
+        multiplier = 1;
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        _lblHeader.center = CGPointMake(_lblHeader.center.x + multiplier*10, _lblHeader.center.y);
+        _lblFooter.center = CGPointMake(_lblFooter.center.x + multiplier*10, _lblFooter.center.y);
+    }];
+}
+
 #pragma mark - UICollectionView Scroll Events
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
 //    NSLog(@"Did Scroll");
 }
-
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset NS_AVAILABLE_IOS(5_0)
 {
     if(velocity.x < 0)
@@ -180,6 +202,11 @@
     }
     [self.collectionView selectDate:_lastSelectedDate animated:NO scrollPosition:UICollectionViewScrollPositionNone];
     [self setHeaderFooterLabelsForDate:_lastSelectedDate];
+    [self animateHeaderFooterLable:velocity.x];
+    
+    if(_delegate && [_delegate respondsToSelector:@selector(collectionViewEndDragging:withVelocity:targetContentOffset:)])
+        [_delegate collectionViewEndDragging:_collectionView withVelocity:velocity targetContentOffset:targetContentOffset];
+    
     if(_delegate && [_delegate respondsToSelector:@selector(collectionView:didSelectDate:)])
         [_delegate collectionView:self.collectionView didSelectDate:_lastSelectedDate];
 }

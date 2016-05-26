@@ -22,8 +22,10 @@ NSString *const kNGWeeklyCalendarCollectionViewCellReId = @"NGWeeklyCalendarColl
     [super setSelected:selected];
     if (selected) {
         _imgVwDateSelected.image = [UIImage imageNamed:@"big_red_dot"];
+        _lblDateUnit.textColor = [UIColor whiteColor];
     } else {
         _imgVwDateSelected.image = nil;
+        _lblDateUnit.textColor = [UIColor blackColor];
     }
 }
 
@@ -37,6 +39,9 @@ NSString *const kNGWeeklyCalendarCollectionViewCellReId = @"NGWeeklyCalendarColl
 
 -(void)cellHasEvent:(BOOL)hasEvent
 {
-    if (hasEvent) _imgVwEvent.image = [UIImage imageNamed:@"big_green_dot"];
+    if (hasEvent) {
+//        NSLog(@"has Event , _imgVwEvent %@", _imgVwEvent);
+     _imgVwEvent.image = [UIImage imageNamed:@"big_green_dot"];
+    }
 }
 @end

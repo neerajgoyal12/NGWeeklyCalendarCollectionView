@@ -22,8 +22,9 @@
 -(NSNumber *)weekDay;
 -(NSDate *)dateByMakingHour:(NSUInteger)hour minute:(NSUInteger)minute seconds:(NSUInteger)seconds;
 -(NSDate *)dateAt12AMForLocalTimeZone;
-
+-(NSDate *)dateByAddingOneDay;
 -(NSDate *)dateInLocalTimeZone;
+
 +(NSDate *)getTodaysDateInLocalTimeZone;
 +(NSDate *)getTommrowsDateInLocalTimeZone;
 

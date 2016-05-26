@@ -23,6 +23,7 @@
 @optional
 -(void)collectionView:(NGWeeklyCalendarCollectionView *)collectionView didSelectDate:(NSDate *)date;
 -(void)collectionView:(NGWeeklyCalendarCollectionView *)collectionView didEndDisplayingCell:(NGWeeklyCalendarCollectionViewCell *)cell forDate:(NSDate *)date;
+-(void)collectionViewEndDragging:(NGWeeklyCalendarCollectionView *)collectionView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset;
 @end
 
 @interface NGWeeklyCalendarCollectionViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
@@ -54,6 +55,6 @@
 -(IBAction)btnTodaysDateTapped:(UIButton *)btnTodaysDate;
 
 -(void)scrollToDate:(NSDate *)date;
-
+@property (nonatomic, strong) NSDate *lastSelectedDate;
 @end
 
